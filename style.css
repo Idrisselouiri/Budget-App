@@ -1,0 +1,113 @@
+
+*{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.box{
+    width: 50%;
+    height: 50%;
+    background-color:blueviolet ;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}
+.box .title{
+    margin: 20px 0;
+    font-size: 1rem;
+}
+.box .title p span{
+    font-size: 22px;
+    font-weight: bold;
+
+}
+.box .balance{
+    font-weight: bold;
+    line-height: 40px;
+}
+.box .balance h1 span { 
+    font-weight: 100;
+}
+.box .IncOutc-box{
+    margin: 30px auto;
+    width: 90%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.box .IncOutc-box .Income ,
+.Outcome
+{
+    line-height: 25px;
+    color: #aaa;
+}
+.box .IncOutc-box .Income a ,
+.Outcome a
+{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.box .IncOutc-box .Income a span ,
+.Outcome a span
+{
+    font-weight: 100;
+}
+.box2{
+    background-color: #ddd;
+    width: 50%;
+    min-height: 50%;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    position: relative;
+}
+.box2 table{
+    width: 100%;
+    text-align: center;
+}
+.box2 table th {
+    border: 1px solid black;
+}
+.box2 table th , td{
+    padding: 10px ; 
+    font-size: 1.1rem;          
+}
+table td img{
+    width: 20px;
+}
+.inputs{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.inputs input{
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    margin-right: 5px;
+}
+.inputs img{
+    width: 40px;
+}
+
+
