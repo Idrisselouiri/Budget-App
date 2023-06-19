@@ -80,16 +80,53 @@ a{
 .box2 table th {
     border: 1px solid black;
 }
-.box2 table th , td{
+.box2 table th {
     padding: 10px ; 
     font-size: 1.1rem;          
 }
-table td img{
-    width: 20px;
+.box2 .list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
 }
-.inputs{
+.box2 .list li {
+    padding: 10px 0;
+}
+.box2 .list li  a {
+    color: black;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.box2 .list li a img{
+    width:30px;
+}
+.outcome-list .inputs{
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    left: 0;
+    z-index: 1;
+    border-top: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.outcome-list .inputs input{
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    margin-right: 5px;
+}
+.outcome-list .inputs img{
+    width: 40px;
+}
+.income-list .inputs{
+    position: absolute;
+    bottom: 0px;
     left: 0;
     border-top: 1px solid black;
     width: 100%;
@@ -99,15 +136,21 @@ table td img{
     padding: 0;
     margin: 0;
 }
-.inputs input{
+.income-list .inputs input{
     padding: 10px;
     border: none;
     outline: none;
     font-size: 1.1rem;
     margin-right: 5px;
 }
-.inputs img{
+.income-list .inputs img{
     width: 40px;
+}
+.hide{
+    opacity: 0;
+}
+.active{
+    color: blueviolet;
 }
 
 
