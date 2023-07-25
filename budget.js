@@ -1,202 +1,204 @@
-const balance = document.querySelector(".balance h1");
-const Income = document.querySelector('.Income a');
-const Outcome = document.querySelector('.Outcome a');
+// select Element
+const balanceEL = document.querySelector('.total-balance ');
+const incomeTotalEl = document.querySelector('.total-income ');
+const outcomeTotalEl = document.querySelector('.total-outcome');
+const expenseEl = document.querySelector('.expense');
+const incomeEl = document.querySelector('.income');
+const allEl = document.querySelector('.all');
+ // LIST 
+let listExpense = document.querySelector('.expense .list') ;
+let listIncome = document.querySelector('.income .list') ;
+let listAll = document.querySelector('.all .list') ;
+// Select Btn
+const btnExpense = document.querySelector('.tab1');
+const btnIncome = document.querySelector('.tab2');
+const btnAll = document.querySelector('.tab3');
+// Input Btn
+const titleExpense = document.getElementById('title-expense');
+const priceExpense = document.getElementById('price-expense');
+const addExpense = document.getElementById('add-expense');
 
- // table
- const ExpensesTh = document.querySelector('.thead .Expenses');
- const IncomeTh = document.querySelector('.thead .Income');
- const All = document.querySelector('.All');
-// element
-const outcomeList = document.querySelector('.outcome-list');
-const incomeList = document.querySelector('.income-list');
-const allList = document.querySelector('.all-list');
-//inputs Income
-const inputs = document.querySelector('.inputs')
-const Incometitle = document.getElementById('income-Title');
-const Incomeprice = document.getElementById('income-price');
+const titleIncome = document.getElementById('title-income');
+const priceIncome = document.getElementById('price-income');
 const addIncome = document.getElementById('add-income');
-//inputs Outcome
-const Outcometitle = document.getElementById('outcome-Title');
-const Outcomeprice = document.getElementById('outcome-price');
-const addOutcome = document.getElementById('add-outcome');
-// list 
-const listIncome = document.querySelector(".income-list .list");
-const listOutcome = document.querySelector(".outcome-list .list");
-const listAll = document.querySelector('.all-list .list')
- // btn
- const btnRemove = document.querySelector('.remove');
- const btnEdit = document.querySelector('.edit');
+// create the variabales
+let array = [] ;
+btnExpense.addEventListener("click" , () =>{
+    show(expenseEl) ;
+    hide([incomeEl , allEl]) ; 
+    active(btnExpense) ;
+    inactive([btnIncome , btnAll]) ;
+})
+btnIncome.addEventListener("click" , () =>{
+    show(incomeEl) ;
+    hide([expenseEl , allEl]) ; 
+    active(btnIncome) ;
+    inactive([btnExpense , btnAll]) ;
+})
+btnAll.addEventListener("click" , () =>{
+    show(allEl) ;
+    hide([incomeEl , expenseEl]) ; 
+    active(btnAll) ;
+    inactive([btnIncome , btnExpense]) ;
+})
 
-// create a variable
-let array = [] ; let Balance = 0 ; let income = 0 ; let outcome = 0 ;
-let DELETE = "remove" ;
-let EDIT = "edit" ;
- // addEventListener
-
- IncomeTh.addEventListener('click' , () => {
-    show(incomeList);
-    active(IncomeTh);
-    hide([outcomeList , allList]);
-    inactive([ExpensesTh , All])
- })
-ExpensesTh.addEventListener('click' , () => {
-    show(outcomeList);
-    active(ExpensesTh);
-    hide([incomeList , allList]);
-    inactive([IncomeTh , All]);
- })
- All.addEventListener('click' , () => {
-    show(allList);
-    active(All);
-    hide([outcomeList , incomeList]);
-    inactive([ExpensesTh , IncomeTh]);
- })
-
- listIncome.addEventListener("click" , editOrDelete);
- listOutcome.addEventListener("click" , editOrDelete);
- listAll.addEventListener("click" , editOrDelete);
-
- // edit or delete
- function editOrDelete(event){
-    const btnTarget = event.target ;
-    const entry = btnTarget.parentNode ;
-    if(btnTarget.classList == DELETE){
-        Delete(entry) 
-    } else if(btnTarget.classList == EDIT){
-        Edit(entry)
+listExpense.addEventListener('click' ,deleteOrEdit) ;
+listIncome.addEventListener('click' ,deleteOrEdit) ;
+listAll.addEventListener('click' ,deleteOrEdit) ;
+// delete or edit()
+function deleteOrEdit(event){
+    let targetBtn = event.target ;
+    let li = targetBtn.parentNode ;
+    if(targetBtn.classList == "close"){
+        Delete(li)
+    }else if(targetBtn.classList == "edit"){
+        Edit(li) ;
     }
- }
-// Delete 
-function Delete(entry){
-    array.splice(entry.id , 1);
-    update() ;
 }
-//Edit
-function Edit(entry){
-    let ENTRY = array[entry.id]
-    if(ENTRY.type == "income"){
-        Incometitle.value = ENTRY.title;
-        Incomeprice.value = ENTRY.price;
-    }
-    else if(ENTRY.type == "outcome"){
-        Outcometitle.value = ENTRY.title;
-        Outcomeprice.value = ENTRY.price;
-    }
-    Delete(entry);
+// DELETE FN
+function Delete(li){
+    array.splice(li.id , 1) ;
+    showData() ;
 }
+// edit Fn
+function Edit(li){
+    let info = array[li.id] ;
 
-addIncome.addEventListener("click" , () => {
-    if(!Incometitle.value || !Incomeprice.value) return ;
-
-    const objIncome = {
-        type : "income" , 
-        title : Incometitle.value,
-        price : parseInt(Incomeprice.value),
+    if(info.type == "income"){
+        titleIncome.value = info.title ;
+        priceIncome.value = info.price ; 
+    }else if(info.type == "expense"){
+        titleExpense.value = info.title ;
+        priceExpense.value = info.price ;
     }
-
-    array.push(objIncome);
-    deleteDataInput(Incometitle , Incomeprice) ;
-    update() 
-}) 
-addOutcome.addEventListener("click" , () => {
-    if(!Outcometitle.value || !Outcomeprice.value) return ;
-
-    const objOutcome = {
-        type : "outcome" , 
-        title : Outcometitle.value,
-        price : parseInt(Outcomeprice.value),
+    Delete(li) ; 
+}
+addExpense.addEventListener('click' , () =>{
+    if(!titleExpense || !priceExpense) return ;
+   let expense = {
+        type : "expense" ,
+        title : titleExpense.value ,
+        price : parseFloat(priceExpense.value)
     }
-    array.push(objOutcome);
-    deleteDataInput(Outcometitle , Outcomeprice) ;
-    update() 
-}) 
-function update(){
-    income = calculate('income' , array);
-    outcome =  calculate('outcome' , array) ;
-    Balance = Math.abs(total(income , outcome)) ;
-    
-    let asign = (income >= outcome) ? '$' : '-$' ;
+    array.push(expense) ;
+    showData() ;
+    clearInputs([titleExpense , priceExpense]) ;
+})
+addIncome.addEventListener('click' , () =>{
+    if(!titleIncome || !priceIncome) return ;
+   let income = {
+        type : "income" ,
+        title : titleIncome.value ,
+        price : parseFloat(priceIncome.value)
+    }
+    array.push(income) ; 
+    showData() ;
+    clearInputs([titleIncome , priceIncome]) ;
+})
 
-    balance.innerHTML = `<span>${asign}</span>${Balance}` ;
-    Income.innerHTML = `<span>$</span>${income}` ;
-    Outcome.innerHTML = `<span>$</span>${outcome}` ;
+//showData()
+function showData(){
+    let incomeTotal = calculateTotal("income" , array);
+    let outcomeTotal = calculateTotal("expense" , array) ;
+    let balance = Math.abs(calculateBalance(incomeTotal , outcomeTotal)) ;
 
-    clearElement([listIncome , listOutcome , listAll]);
+    let sign = (incomeTotal >= outcomeTotal ) ? "$" : "-$" ;
 
-    array.forEach((element , index) => {
-        if(element.type === "income"){
-            showData(element.price , element.title , index , listIncome , element.type)
+    balanceEL.innerHTML = `
+        <p>
+        <span>${sign}</span>${balance}
+        </p>    
+        `   ; 
+    incomeTotalEl.innerHTML = `
+        <p>
+            <span>$</span>${incomeTotal}
+        </p>
+        ` ;
+        outcomeTotalEl.innerHTML = `
+            <p>
+                <span>$</span>${outcomeTotal}
+            </p>
+            `
+
+    clearElements([listExpense , listIncome , listAll]) ;
+    array.forEach((el , index) =>{
+        if(el.type == 'income'){
+            showElement(listIncome , el.title , el.price , index)
         }
-        else if(element.type === "outcome"){
-            showData(element.price , element.title , index , listOutcome , element.type)
+        else if(el.type == 'expense'){
+            showElement(listExpense , el.title , el.price , index)
         }
-       
-    
+            showElement(listAll , el.title , el.price , index)
     })
-   
 
 }
 
-function showData(price , title , id , list , type) {
-    const entryList = `
-    <li id = "${id}" class="${type}">
-        <a href="#">
-            ${title}: ${price}
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            <img src="icon/edit.png" class="edit">
-            <img src="icon/trash.png" class="remove">
-        </a>
-    </li>
+//showElement()
+function showElement(list , title , price , id ){
+    const List  = `
+                    <li id = "${id}">
+                        <div  class="entry">
+                            <p>${title}:${price}</p>
+                        </div>
+                        <div class="edit"></div>
+                        <div class="close"></div>
+                    </li>
     `
     let position = "afterbegin" ;
-    list.insertAdjacentHTML(position , entryList)
+    list.insertAdjacentHTML(position , List)
+
 }
 
-function clearElement(elements){
-    elements.forEach(items => {
-        items.innerHTML = '' ;
+//clearElements()
+function clearElements(elements){
+    elements.forEach(element =>{
+        element.innerHTML = '' ;
     })
 }
-function calculate(type , arr){
-    let total = 0;
-    arr.forEach(item => {
-        if(item.type === type){
-            total += item.price
+
+//calculateTotal()
+function calculateTotal(type , arr){
+    let total = 0 ;
+    arr.forEach(entry =>{
+        if(entry.type == type){
+            total = total + entry.price ;
         }
     })
-    return total
+    return total ;
 }
 
-function total(el1 , el2){
-   return el1 - el2 ;
-}
-function deleteDataInput(input1 , input2){
-    input1.value = ""; 
-    input2.value = ""; 
+// calculateBalance()
+function calculateBalance(income , outcome){
+    return income - outcome
 }
 
-function show(el){
-    el.classList.remove('hide');
+//clearInputs()
+function clearInputs(Inputs){
+    Inputs.forEach(elements =>{
+        elements.value = "" ;
+    })
 }
 
- function active(el){
-    el.classList.add("active");
- }
+//show()
+function show(element){
+    element.classList.remove('hide');
+}
+
+//hide()
 function hide(elements){
     elements.forEach(element => {
-        element.classList.add("hide")
+        element.classList.add('hide')
     });
 }
+
+//active
+function active(element){
+    element.classList.add('active')
+}
+
+//inactive
 function inactive(elements){
     elements.forEach(element => {
-        element.classList.remove("active")
+        element.classList.remove('active')
     });
 }
-
-
-
-
-

@@ -1,156 +1,225 @@
-
 *{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 a{
     text-decoration: none;
-    color: #fff;
+    color: black;
+}
+ul{
+    list-style: none;
 }
 .container{
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    width: 50%;
+    background-color: #dddddd;
+    margin: auto;
+}
+.box1{
+    min-height: 250px;
+    width: 100%;
+    padding: 20px;
+}
+.title{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.balance{
+    margin-top: 30px;
+    line-height: 35px;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     flex-direction: column;
-    position: relative;
 }
-.box{
-    width: 50%;
-    height: 50%;
-    background-color:blueviolet ;
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
+.balance p{
+    font-size: 25px;
+    letter-spacing: 3px;
 }
-.box .title{
-    margin: 20px 0;
-    font-size: 1rem;
-}
-.box .title p span{
-    font-size: 22px;
-    font-weight: bold;
-
-}
-.box .balance{
-    font-weight: bold;
-    line-height: 40px;
-}
-.box .balance h1 span { 
-    font-weight: 100;
-}
-.box .IncOutc-box{
-    margin: 30px auto;
-    width: 90%;
+.min-box{
+    margin-top: 30px;
     border: 1px solid black;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.box .IncOutc-box .Income ,
-.Outcome
-{
-    line-height: 25px;
-    color: #aaa;
-}
-.box .IncOutc-box .Income a ,
-.Outcome a
-{
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-.box .IncOutc-box .Income a span ,
-.Outcome a span
-{
-    font-weight: 100;
-}
-.box2{
-    background-color: #ddd;
-    width: 50%;
-    min-height: 50%;
-    border-radius: 20px 20px 0 0;
-    padding: 20px;
-    position: relative;
-}
-.box2 table{
-    width: 100%;
+.income-div{
+    line-height: 30px;
     text-align: center;
+    font-size: 20px;
 }
-.box2 table th {
+.income-div p{
+    font-size: 25px ;
+}
+.outcome-div{
+    line-height: 35px;
+    text-align: center;
+    font-size: 20px;
+}
+.outcome-div p{
+    font-size: 25px;
+}
+
+.box2{
+    min-height: 400px;
     border: 1px solid black;
+    padding: 20px;
 }
-.box2 table th {
-    padding: 10px ; 
-    font-size: 1.1rem;          
+.toggle{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 25px;
 }
-.box2 .list {
+.toggle .tab1 ,
+.tab2 ,
+.tab3{
+    opacity: .4;
+}
+.expense{
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+}
+.expense ul {
+    width:100% ;
+    min-height: 250px;
+    padding: 0 20px 40px 20px;
+}
+.expense ul li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.expense ul .entry p{
+    font-size: 22px;
+}
+.expense ul .edit{
+    position: absolute;
+    top: 0;
+    right: 40px;
+    background: url('icon/edit.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.expense ul .close{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: url('icon/trash.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.income{
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+}
+.income ul {
+    width:100% ;
+    min-height: 250px;
+    padding: 0 20px 40px 20px;
+}
+.income ul li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.income ul .entry p{
+    font-size: 22px;
+}
+.income ul .edit{
+    position: absolute;
+    top: 0;
+    right: 40px;
+    background: url('icon/edit.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.income ul .close{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: url('icon/trash.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.all{
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+}
+.all ul {
+    width:100% ;
+    min-height: 250px;
+    padding: 0 20px;
+}
+.all ul li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.all ul .entry p{
+    font-size: 22px;
+}
+.all ul .edit{
+    position: absolute;
+    top: 0;
+    right: 40px;
+    background: url('icon/edit.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.all ul .close{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: url('icon/trash.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.inputs{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    list-style: none;
+    width: 100%;
 }
-.box2 .list li {
-    padding: 10px 0;
-}
-.box2 .list li  a {
+.inputs input{
+    border: none;
+    outline: none;
+    padding: 0 10px;
     color: black;
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-right: 10px;
 }
-.box2 .list li a img{
-    width:30px;
-}
-.outcome-list .inputs{
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    z-index: 1;
-    border-top: 1px solid black;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
-.outcome-list .inputs input{
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 1.1rem;
-    margin-right: 5px;
-}
-.outcome-list .inputs img{
+.inputs img{
     width: 40px;
-}
-.income-list .inputs{
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    border-top: 1px solid black;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
-.income-list .inputs input{
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 1.1rem;
-    margin-right: 5px;
-}
-.income-list .inputs img{
-    width: 40px;
-}
-.hide{
-    opacity: 0;
+    height: 40px;
 }
 .active{
-    color: blueviolet;
+    opacity: 1 !important;
 }
-
-
+.hide{
+    display: none;
+}
