@@ -175,16 +175,7 @@ ul{
 .all ul .entry p{
     font-size: 22px;
 }
-.all ul .edit{
-    position: absolute;
-    top: 0;
-    right: 40px;
-    background: url('icon/edit.png');
-    background-position: center;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-}
+
 .all ul .close{
     position: absolute;
     top: 0;

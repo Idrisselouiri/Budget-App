@@ -22,7 +22,9 @@ const titleIncome = document.getElementById('title-income');
 const priceIncome = document.getElementById('price-income');
 const addIncome = document.getElementById('add-income');
 // create the variabales
-let array = [] ;
+let array ;
+array = JSON.parse(localStorage.getItem('arr')) || [] ;
+showData() ;
 btnExpense.addEventListener("click" , () =>{
     show(expenseEl) ;
     hide([incomeEl , allEl]) ; 
@@ -130,7 +132,7 @@ function showData(){
         }
             showElement(listAll , el.title , el.price , index)
     })
-
+localStorage.setItem('arr' , JSON.stringify(array)) ;
 }
 
 //showElement()
